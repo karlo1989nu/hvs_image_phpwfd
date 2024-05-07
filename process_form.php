@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Handle non-POST requests
     echo "Error: Form submission method not allowed.";
 }
-*/
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["filename"]) && !empty($_POST["filename"]) && isset($_POST["envname"]) && isset($_POST["maxtime"])) {
@@ -62,7 +62,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Specify the directory to save the file
-        $directory = "/path/to/your/directory/";
+$directory = "C:\xampp\htdocs\hvs_image_phpwfd\text_files" . DIRECTORY_SEPARATOR;
+
+// Write content to file
+$allFilePath = $directory . $filename . "_all.txt";
+$allFile = fopen($allFilePath, "w");
+if ($allFile === false) {
+    echo "Error: Unable to open file for writing.";
+    exit;
+}
+fwrite($allFile, $allContent);
+fclose($allFile);
+
+echo "File generated successfully at: " . $allFilePath;
+    }*/
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["filename"]) && !empty($_POST["filename"]) && isset($_POST["envname"]) && isset($_POST["maxtime"])) {
+        $filename = $_POST["filename"];
+        $envnames = $_POST["envname"];
+        $maxtimes = $_POST["maxtime"];
+
+        // Validate input format
+        if (!isValidTimeFormat($maxtimes)) {
+            echo "Error: Invalid time format.";
+            exit;
+        }
+
+        // Generate content for all trials
+        $allContent = "File Name: " . $filename . "\n";
+        $allContent .= "Trials:\n";
+        for ($i = 0; $i < count($envnames); $i++) {
+            $allContent .= "Trial " . ($i + 1) . ":\n";
+            $allContent .= "Environment: " . $envnames[$i] . "\n";
+            $allContent .= "Maximum Time: " . $maxtimes[$i] . "\n\n";
+        }
+
+        // Specify the directory to save the file
+        $directory = 'C:\xampp\htdocs\hvs_image_phpwfd\text_files' . DIRECTORY_SEPARATOR;
 
         // Write content to file
         $allFilePath = $directory . $filename . "_all.txt";
@@ -74,9 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         fwrite($allFile, $allContent);
         fclose($allFile);
 
-        // Download the file
-        header("Content-Disposition: attachment; filename=" . $allFilePath);
-        readfile($allFilePath);
+        echo "File generated successfully at: " . $allFilePath;
         exit;
     } else {
         echo "Error: Missing form fields.";
@@ -94,4 +130,5 @@ function isValidTimeFormat($times)
     }
     return true;
 }
+
 ?>
