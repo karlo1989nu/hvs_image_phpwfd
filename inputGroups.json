@@ -1,0 +1,16 @@
+[
+  { "label": "Environment:", "type": "text", "name": "envname" },
+  { "label": "Maximum Time:", "type": "time", "name": "maxtime" },
+  { "label": "SET_SCENE:", "type": "text", "name": "setscene" },
+  { "label": "REMARKS:", "type": "text", "name": "remarks" },
+  {
+    "label": "TRACKING_DIAMETER:",
+    "type": "float",
+    "name": "trackingdiameter"
+  },
+  {
+    "label": "TRACKING_AREA_NORTH:",
+    "type": "float",
+    "name": "trackingareanorth"
+  }
+]
