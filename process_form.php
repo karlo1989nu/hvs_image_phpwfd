@@ -38,10 +38,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Handle non-POST requests
     echo "Error: Form submission method not allowed.";
 }
-
-
+*/
+/*
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST["filename"]) && !empty($_POST["filename"]) && isset($_POST["envname"]) && isset($_POST["maxtime"])) {
+    if (isset($_POST["#filename"]) && !empty($_POST["filename"]) && isset($_POST["envname"]) && isset($_POST["maxtime"])) {
         $filename = $_POST["filename"];
         $envnames = $_POST["envname"];
         $maxtimes = $_POST["maxtime"];
@@ -62,21 +62,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Specify the directory to save the file
-$directory = "C:\xampp\htdocs\hvs_image_phpwfd\text_files" . DIRECTORY_SEPARATOR;
+        $directory = 'C:\xampp\htdocs\hvs_image_phpwfd\text_files' . DIRECTORY_SEPARATOR;
 
-// Write content to file
-$allFilePath = $directory . $filename . "_all.txt";
-$allFile = fopen($allFilePath, "w");
-if ($allFile === false) {
-    echo "Error: Unable to open file for writing.";
-    exit;
+        // Write content to file
+        $allFilePath = $directory . $filename . "_all.txt";
+        $allFile = fopen($allFilePath, "w");
+        if ($allFile === false) {
+            echo "Error: Unable to open file for writing.";
+            exit;
+        }
+        fwrite($allFile, $allContent);
+        fclose($allFile);
+
+        echo "File generated successfully at: " . $allFilePath;
+    }
 }
-fwrite($allFile, $allContent);
-fclose($allFile);
-
-echo "File generated successfully at: " . $allFilePath;
-    }*/
-
+*/
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["filename"]) && !empty($_POST["filename"]) && isset($_POST["envname"]) && isset($_POST["maxtime"])) {
