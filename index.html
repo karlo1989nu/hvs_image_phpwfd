@@ -12,7 +12,6 @@
     <!-- Personalized CSS -->
     <link rel="stylesheet" href="styles.css" />
   </head>
-
   <body>
     <div class="container mt-5">
       <div class="row justify-content-center">
@@ -20,8 +19,11 @@
           <div class="card">
             <div class="card-header">Experimental Setup</div>
             <div class="card-body" id="form-container">
-              <form action="process_form.php" method="POST">
-                <!--  process_form.php -->
+              <form
+                action="process_form.php"
+                method="POST"
+                id="experiment-form"
+              >
                 <div class="form-group">
                   <label for="filename">File Name:</label>
                   <input
@@ -29,6 +31,7 @@
                     class="form-control"
                     id="filename"
                     name="filename"
+                    required
                   />
                 </div>
                 <div class="card-header">Trials</div>
@@ -36,12 +39,7 @@
                 <button type="button" class="btn btn-success" id="add-trial">
                   Add Trial
                 </button>
-                <button
-                  type="submit"
-                  class="btn btn-success"
-                  id="send-form"
-                  name="send-form"
-                >
+                <button type="submit" class="btn btn-success" id="send-form">
                   Send
                 </button>
               </form>
