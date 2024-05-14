@@ -5,7 +5,7 @@ $(document).ready(function () {
   // Load inputGroups from JSON file
   $.getJSON("inputGroups.json", function (data) {
     inputGroups = data;
-    console.log(inputGroups); // Log the loaded data for testing
+    console.log(inputGroups);
 
     // Event binding for dynamically added elements
     bindEvents();
@@ -42,33 +42,31 @@ $(document).ready(function () {
       trialHtml += "</div>";
 
       $("#trial-container").append(trialHtml);
-      trialCount++; // Increment the trial counter
+      trialCount++;
     });
 
     // Function to remove a form
     $(document).on("click", ".remove-trial", function () {
       $(this).closest(".trial").remove();
-      trialCount--; // Decrement the trial counter
+      trialCount--;
     });
 
     // Function to submit the form and send data to the server
     $("#experiment-form").submit(function (event) {
-      event.preventDefault(); // Prevent default form submission
+      event.preventDefault();
 
-      var formData = $(this).serialize(); // Serialize form data
+      var formData = $(this).serialize();
 
       // Send form data to the server using AJAX
       $.ajax({
         type: "POST",
-        url: "./process_form.php", // Change this to the path of your PHP script
+        url: "./process_form.php",
         data: formData,
         success: function (response) {
-          // Handle the server response
-          console.log(response); // Log the server response for testing
+          console.log(response);
         },
         error: function (xhr, status, error) {
-          // Handle errors
-          console.error(xhr.responseText); // Log error message
+          console.error(xhr.responseText);
         },
       });
     });

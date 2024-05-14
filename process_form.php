@@ -6,8 +6,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check if the filename is provided
     if (!empty($filename)) {
-        // Set the directory where you want to save the files
-        $directory = 'C:\xampp\htdocs\hvs_image_phpwfd\text_files\\';
+        // Set the directory to save the files
+        $directory = 'C:/xampp/htdocs/hvs_image_phpwfd/text_files/';
 
         // Generate the file path
         $filepath = $directory . $filename . ".txt";
@@ -15,26 +15,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Get the content from the form
         $content = "Experimental Setup\n\n";
 
-        // Loop through each trial and add its content to the file
-        foreach ($_POST["trials"] as $trial) {
-            $content .= $trial["header"] . "\n";
-            foreach ($trial["data"] as $label => $value) {
-                $content .= $label . ": " . $value . "\n";
+        // Loop through each input group to retrieve data
+        foreach ($_POST as $key => $value) {
+            // Skip filename field
+            if ($key !== 'filename') {
+                // Convert array to a string
+                if (is_array($value)) {
+                    $value = implode(', ', $value);
+                }
+                // Format data
+                $content .= $key . ": " . $value . "\n";
             }
-            $content .= "\n";
         }
 
         // Save the content to the file
         file_put_contents($filepath, $content);
 
-        // Output success message
-        echo "File saved successfully.";
+        // Force download the file
+        if (file_exists($filepath)) {
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="' . basename($filepath) . '"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($filepath));
+            readfile($filepath);
+            exit;
+        } else {
+            echo "File not found.";
+        }
     } else {
-        // Output error message if filename is not provided
         echo "Please provide a filename.";
     }
 } else {
-    // Output error message if form is not submitted
     echo "Form submission error.";
 }
-?>
+
+

@@ -1,16 +1,56 @@
 [
-  { "label": "Environment:", "type": "text", "name": "envname" },
-  { "label": "Maximum Time:", "type": "time", "name": "maxtime" },
-  { "label": "SET_SCENE:", "type": "text", "name": "setscene" },
-  { "label": "REMARKS:", "type": "text", "name": "remarks" },
+  { "label": "Experimenter name:", "type": "text", "name": "USER_NAME" },
+  { "label": "Task name:", "type": "text", "name": "TRIAL_NAME" },
+  { "label": "Environment:", "type": "text", "name": "SET_SCENE" },
+  { "label": "Participant name:", "type": "text", "name": "SUBJECT" },
   {
-    "label": "TRACKING_DIAMETER:",
-    "type": "float",
-    "name": "trackingdiameter"
+    "label": "Group name:",
+    "type": "text",
+    "name": "DESCRIPTOR"
   },
   {
-    "label": "TRACKING_AREA_NORTH:",
+    "label": "Remarks:",
+    "type": "text",
+    "name": "REMARKS"
+  },
+  {
+    "label": "Trial type (Visible target, Regular or Probe):",
+    "type": "text",
+    "name": "TRIAL_TYPE"
+  },
+  {
+    "label": "Start point:",
+    "type": "text",
+    "name": "TRIAL_START_POINT"
+  },
+  {
+    "label": "Target radius:",
     "type": "float",
-    "name": "trackingareanorth"
+    "name": "TARGET_RADIUS"
+  },
+  {
+    "label": "Target position:",
+    "type": "float",
+    "name": "TARGET_POSITION"
+  },
+  {
+    "label": "Visible target:",
+    "type": "float",
+    "name": "MOVE_OBJECT"
+  },
+  {
+    "label": "Maximum time (secs):",
+    "type": "float",
+    "name": "MAXIMUM_TIME"
+  },
+  {
+    "label": "Time participant is kept at target (secs):",
+    "type": "float",
+    "name": "STOP_INTERVAL"
+  },
+  {
+    "label": "Time between trials(secs):",
+    "type": "float",
+    "name": "INTER_TRIAL_INTERVAL"
   }
 ]
