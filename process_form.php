@@ -1,5 +1,4 @@
 <?php
-// Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get the filename from the form
     $filename = $_POST["filename"];
@@ -33,14 +32,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Save the content to the file
         if (file_put_contents($filepath, $content) !== false) {
-            // Inform the user that the file was successfully saved
-            echo "<script>alert:('File successfully saved on the server');</script>";
+            // Send a success response
+            echo "File successfully saved on the server";
         } else {
-            echo "<script>alert:('Error: Failed to save file.');</script>";
+            // Send an error response
+            http_response_code(500);
+            echo "Error: Failed to save file.";
         }
     } else {
-        echo "<script>alert:('Error: Please provide a filename.');</script>";
+        // Send an error response
+        http_response_code(400);
+        echo "Error: Please provide a filename.";
     }
 } else {
-    echo "<script>alert:('Error: Form submission error.');</script>";
+    // Send an error response
+    http_response_code(400);
+    echo "Error: Form submission error.";
 }
