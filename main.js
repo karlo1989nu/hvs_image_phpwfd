@@ -63,10 +63,12 @@ $(document).ready(function () {
         url: "./process_form.php",
         data: formData,
         success: function (response) {
-          console.log(response);
+          $("#modalResponseBody").text("Success: " + response);
+          $("#responseModal").modal("show");
         },
         error: function (xhr, status, error) {
-          console.error(xhr.responseText);
+          $("#modalResponseBody").text("Error: " + xhr.responseText);
+          $("#responseModal").modal("show");
         },
       });
     });

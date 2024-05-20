@@ -36,7 +36,7 @@
   {
     "label": "Visible target:",
     "type": "float",
-    "name": "MOVE_OBJECT"
+    "name": "MOVE_OBJECT Visible_10cm_Platform"
   },
   {
     "label": "Maximum time (secs):",

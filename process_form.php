@@ -24,32 +24,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $value = implode(', ', $value);
                 }
                 // Format data
-                $content .= $key . ": " . $value . "\n";
+                $content .= $key . " " . $value . "\n";
             }
         }
 
-        // Save the content to the file
-        file_put_contents($filepath, $content);
+        // Append "NEXT_TEST" at the end of the content
+        $content .= "\nNEXT_TEST\n";
 
-        // Force download the file
-        if (file_exists($filepath)) {
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename="' . basename($filepath) . '"');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($filepath));
-            readfile($filepath);
-            exit;
+        // Save the content to the file
+        if (file_put_contents($filepath, $content) !== false) {
+            // Inform the user that the file was successfully saved
+            echo "<script>alert:('File successfully saved on the server');</script>";
         } else {
-            echo "File not found.";
+            echo "<script>alert:('Error: Failed to save file.');</script>";
         }
     } else {
-        echo "Please provide a filename.";
+        echo "<script>alert:('Error: Please provide a filename.');</script>";
     }
 } else {
-    echo "Form submission error.";
+    echo "<script>alert:('Error: Form submission error.');</script>";
 }
-
-
