@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if the filename is provided
     if (!empty($filename)) {
         // Set the directory to save the files
-        $directory = 'C:/xampp/htdocs/hvs_image_phpwfd/text_files/';
+        $directory = 'https://hvsimage.com/HVS6DVR/ExampleUniversity/ExampleUser/ivsimage_form_live_testing/text_files/';
 
         // Generate the file path
         $filepath = $directory . $filename . ".txt";
