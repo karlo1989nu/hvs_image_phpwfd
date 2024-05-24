@@ -5,7 +5,7 @@ $(document).ready(function () {
   // Load inputGroups from JSON file
   $.getJSON("inputGroups.json", function (data) {
     inputGroups = data;
-    console.log(inputGroups);
+    //console.log(inputGroups);
 
     // Event binding for dynamically added elements
     bindEvents();
@@ -63,11 +63,11 @@ $(document).ready(function () {
         url: "./process_form.php",
         data: formData,
         success: function (response) {
-          $("#modalResponseBody").text("Success: " + response);
+          $("#modalResponseBody").text("Success: " response);
           $("#responseModal").modal("show");
         },
         error: function (xhr, status, error) {
-          $("#modalResponseBody").text("Error: " + xhr.responseText);
+          $("#modalResponseBody").text("Error: ", xhr.responseText);
           $("#responseModal").modal("show");
         },
       });
