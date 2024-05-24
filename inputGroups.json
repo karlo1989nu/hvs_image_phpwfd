@@ -1,0 +1,16 @@
+[
+  { "label": "Name:", "type": "text", "name": "USER_NAME" },
+  { "label": "Task:", "type": "text", "name": "TRIAL_NAME" },
+  { "label": "Field:", "type": "text", "name": "SET_SCENE" },
+  { "label": "Participant ID:", "type": "text", "name": "SUBJECT" },
+  {
+    "label": "Group:",
+    "type": "text",
+    "name": "DESCRIPTOR"
+  },
+  {
+    "label": "Remarks:",
+    "type": "text",
+    "name": "REMARKS"
+  }
+]

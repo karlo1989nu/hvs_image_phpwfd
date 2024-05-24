@@ -1,0 +1,1 @@
+[21-May-2024 18:08:09 America/Chicago] PHP Warning:  file_put_contents(https://hvsimage.com/HVS6DVR/ExampleUniversity/ExampleUser/ivsimage_form/text_filesgfdag.txt): failed to open stream: HTTP wrapper does not support writeable connections in /home1/hvsimage/public_html/HVS6DVR/ExampleUniversity/ExampleUser/ivsimage_form/process_form.php on line 35
