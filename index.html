@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Experimental Setup</title>
+    <title>Experimental Input Form</title>
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -27,7 +27,7 @@
                 id="experiment-form"
               >
                 <div class="form-group">
-                  <label for="filename">Experiment File Name:</label>
+                  <label for="filename">File Name:</label>
                   <input
                     type="text"
                     class="form-control"
@@ -36,10 +36,10 @@
                     required
                   />
                 </div>
-                <div class="card-header">Trials</div>
+                <div class="card-header">Data</div>
                 <div class="card-body" id="trial-container"></div>
                 <button type="button" class="btn btn-success" id="add-trial">
-                  Add Trial
+                  Add Set
                 </button>
                 <button type="submit" class="btn btn-success" id="send-form">
                   Finish
@@ -73,9 +73,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body" id="modalResponseBody">
-            <!-- Response will be inserted here -->
-          </div>
+          <div class="modal-body" id="modalResponseBody"></div>
           <div class="modal-footer">
             <button
               type="button"

@@ -63,11 +63,13 @@ $(document).ready(function () {
         url: "./process_form.php",
         data: formData,
         success: function (response) {
-          $("#modalResponseBody").text("Success: " response);
+          $("#modalResponseBody").text(
+            "Success: The file was successfully downloaded."
+          );
           $("#responseModal").modal("show");
         },
         error: function (xhr, status, error) {
-          $("#modalResponseBody").text("Error: ", xhr.responseText);
+          $("#modalResponseBody").text("Error: " + xhr.responseText);
           $("#responseModal").modal("show");
         },
       });
