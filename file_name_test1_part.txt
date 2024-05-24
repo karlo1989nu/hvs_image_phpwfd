@@ -1,4 +1,0 @@
-File Name: file_name_test1
-First Trial:
-Environment: file_name_test1
-Maximum Time: 05:06
