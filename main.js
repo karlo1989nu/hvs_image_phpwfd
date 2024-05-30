@@ -5,7 +5,6 @@ $(document).ready(function () {
   // Load inputGroups from JSON file
   $.getJSON("inputGroups.json", function (data) {
     inputGroups = data;
-    //console.log(inputGroups);
 
     // Event binding for dynamically added elements
     bindEvents();
@@ -23,7 +22,7 @@ $(document).ready(function () {
       trialHtml += '<div class="card-body">';
 
       // Add each input group to the form
-      inputGroups.forEach(function (group, index) {
+      inputGroups.forEach(function (group) {
         trialHtml += '<div class="form-group">';
         trialHtml +=
           '<label for="' + group.name + '">' + group.label + "</label>";
@@ -41,7 +40,14 @@ $(document).ready(function () {
       trialHtml += "</div>";
       trialHtml += "</div>";
 
-      $("#trial-container").append(trialHtml);
+      var $newTrial = $(trialHtml);
+      $("#trial-container").append($newTrial);
+
+      // Copy values from the first trial to the new trial
+      if (trialCount > 1) {
+        copyFirstTrialValues($newTrial);
+      }
+
       trialCount++;
     });
 
@@ -51,9 +57,14 @@ $(document).ready(function () {
       trialCount--;
     });
 
-    // Function to reload the page
-    function reloadPage() {
-      window.location.href = window.location.href;
+    // Function to copy values from the first trial to the new trial
+    function copyFirstTrialValues($newTrial) {
+      var $firstTrial = $(".trial").first();
+
+      $firstTrial.find("input").each(function (index) {
+        var value = $(this).val();
+        $newTrial.find("input").eq(index).val(value);
+      });
     }
 
     // Function to submit the form and send data to the server
@@ -68,10 +79,11 @@ $(document).ready(function () {
         url: "./process_form.php",
         data: formData,
         success: function (response) {
-          $("#modalResponseBody").text(
-            "Success: The file was successfully downloaded."
-          );
+          $("#modalResponseBody").text(response);
           $("#responseModal").modal("show");
+          $("#responseModal").on("hidden.bs.modal", function () {
+            location.reload();
+          });
         },
         error: function (xhr, status, error) {
           $("#modalResponseBody").text("Error: " + xhr.responseText);

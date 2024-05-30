@@ -15,7 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $filepath = $directory . $filename . ".vrScript";
-
         $content = "";
 
         // Get the number of trials to avoid comma bulking
@@ -30,14 +29,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $externalContent = file_get_contents($externalFile);
         } else {
             echo "External file not found.";
+            exit;
         }
 
         // Loop through each trial and construct the content
         for ($i = 0; $i < $numberOfTrials; $i++) {
             foreach ($_POST as $key => $value) {
-
                 if ($key !== 'filename') {
-
                     if (is_array($value)) {
                         $currentValue = $value[$i];
                     } else {
@@ -47,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             }
 
-            // Append the external file
+            // Append the external file content before "NEXT_TEST"
             if (!empty($externalContent)) {
                 $content .= $externalContent . "\n";
             }
@@ -58,7 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Save the content to the file and inform the user
         if (file_put_contents($filepath, $content) !== false) {
             echo "File successfully saved on the server.";
-            echo '<script>window.onload = reloadPage;</script>';
         } else {
             echo "Failed to save file.";
         }
