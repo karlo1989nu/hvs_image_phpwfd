@@ -51,6 +51,11 @@ $(document).ready(function () {
       trialCount--;
     });
 
+    // Function to reload the page
+    function reloadPage() {
+      window.location.href = window.location.href;
+    }
+
     // Function to submit the form and send data to the server
     $("#experiment-form").submit(function (event) {
       event.preventDefault();

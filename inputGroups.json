@@ -12,5 +12,55 @@
     "label": "Remarks:",
     "type": "text",
     "name": "REMARKS"
+  },
+  {
+    "label": "Group name:",
+    "type": "text",
+    "name": "DESCRIPTOR"
+  },
+  {
+    "label": "Remarks:",
+    "type": "text",
+    "name": "REMARKS"
+  },
+  {
+    "label": "Trial type (Visible target, Regular or Probe):",
+    "type": "text",
+    "name": "TRIAL_TYPE"
+  },
+  {
+    "label": "Start point:",
+    "type": "text",
+    "name": "TRIAL_START_POINT"
+  },
+  {
+    "label": "Target radius:",
+    "type": "float",
+    "name": "TARGET_RADIUS"
+  },
+  {
+    "label": "Target position:",
+    "type": "float",
+    "name": "TARGET_POSITION"
+  },
+  {
+    "label": "Visible target:",
+    "type": "float",
+    "name": "MOVE_OBJECT Visible_10cm_Platform"
+  },
+  {
+    "label": "Maximum time (secs):",
+    "type": "float",
+    "name": "MAXIMUM_TIME"
+  },
+  {
+    "label": "Time participant is kept at target (secs):",
+    "type": "float",
+    "name": "STOP_INTERVAL"
+  },
+  {
+    "label": "Time between trials(secs):",
+    "type": "float",
+    "name": "INTER_TRIAL_INTERVAL"
   }
 ]

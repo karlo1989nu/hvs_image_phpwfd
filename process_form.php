@@ -14,32 +14,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mkdir($directory, 0777, true);
         }
 
-        // Generate the file path
-        $filepath = $directory . $filename . ".txt"; // Select file type
+        $filepath = $directory . $filename . ".vrScript";
 
-        // Get the content from the form
-        $content = "Experimental Setup\n\n";
+        $content = "";
 
-        // Loop through each input group to retrieve data
-        foreach ($_POST as $key => $value) {
-            // Skip filename field
-            if ($key !== 'filename') {
-                // Convert array to a string
-                if (is_array($value)) {
-                    $value = implode(', ', $value);
-                }
-                // Format data
-                $content .= $key . " " . $value . "\n";
-            }
+        // Get the number of trials to avoid comma bulking
+        $numberOfTrials = count($_POST["TRIAL_NAME"]);
+
+        // Define the external file path 
+        $externalFile = "./fixed.txt";
+
+        // Read content from the external file
+        $externalContent = "";
+        if (file_exists($externalFile)) {
+            $externalContent = file_get_contents($externalFile);
+        } else {
+            echo "External file not found.";
         }
 
-        // Append "NEXT_TEST" at the end of the content
-        $content .= "\nNEXT_TEST\n";
+        // Loop through each trial and construct the content
+        for ($i = 0; $i < $numberOfTrials; $i++) {
+            foreach ($_POST as $key => $value) {
 
-        // Save the content to the file
+                if ($key !== 'filename') {
+
+                    if (is_array($value)) {
+                        $currentValue = $value[$i];
+                    } else {
+                        $currentValue = $value;
+                    }
+                    $content .= $key . " " . $currentValue . "\n";
+                }
+            }
+
+            // Append the external file
+            if (!empty($externalContent)) {
+                $content .= $externalContent . "\n";
+            }
+
+            $content .= "\nNEXT_TEST\n";
+        }
+
+        // Save the content to the file and inform the user
         if (file_put_contents($filepath, $content) !== false) {
-            // Inform the user that the file was successfully saved
             echo "File successfully saved on the server.";
+            echo '<script>window.onload = reloadPage;</script>';
         } else {
             echo "Failed to save file.";
         }
