@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if the filename is provided
     if (!empty($filename)) {
         // Set the directory to save the files (local directory on the server)
-        $directory = './text_files/';
+        $directory = './vrScript_files/';
 
         // Ensure the directory exists
         if (!is_dir($directory)) {
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (file_exists($externalFile)) {
             $externalContent = file_get_contents($externalFile);
         } else {
-            echo "External file not found.";
+            echo "External file 'fixed.txt' not found.";
             exit;
         }
 
@@ -41,7 +41,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     } else {
                         $currentValue = $value;
                     }
-                    $content .= $key . " " . $currentValue . "\n";
+
+                    // Check if the current field has a dropdown
+                    if (strpos($key, '_other') !== false) {
+                        // If it's an "other" field, append the value directly
+                        $content .= $currentValue . "\n";
+                    } else {
+                        // If it's not an "other" field, append key-value pair
+                        $content .= $key . " " . $currentValue . "\n";
+                    }
                 }
             }
 
@@ -65,3 +73,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     echo "Form submission error.";
 }
+
+

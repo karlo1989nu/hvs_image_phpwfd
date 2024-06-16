@@ -1,13 +1,21 @@
 $(document).ready(function () {
   var trialCount = 1; // Trial counter
   var inputGroups; // Variable to store inputGroups data
+  var coordinates; // Variable to store coordinates data
 
   // Load inputGroups from JSON file
   $.getJSON("inputGroups.json", function (data) {
     inputGroups = data;
 
-    // Event binding for dynamically added elements
-    bindEvents();
+    // Load coordinates from JSON file
+    $.getJSON("coordinates.json", function (data) {
+      coordinates = data;
+
+      // Event binding for dynamically added elements
+      bindEvents();
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      console.error("Error loading coordinates:", textStatus, errorThrown);
+    });
   }).fail(function (jqXHR, textStatus, errorThrown) {
     console.error("Error loading inputGroups:", textStatus, errorThrown);
   });
@@ -26,12 +34,38 @@ $(document).ready(function () {
         trialHtml += '<div class="form-group">';
         trialHtml +=
           '<label for="' + group.name + '">' + group.label + "</label>";
-        trialHtml +=
-          '<input type="' +
-          group.type +
-          '" class="form-control" name="' +
-          group.name +
-          '[]">';
+
+        if (group.dropdown) {
+          trialHtml +=
+            '<select class="form-control" name="' +
+            group.name +
+            '[]" data-name="' +
+            group.name +
+            '">';
+          trialHtml += '<option value="">Select</option>';
+          coordinates.forEach(function (coord) {
+            trialHtml +=
+              '<option value="' +
+              coord.values +
+              '">' +
+              coord.name +
+              "</option>";
+          });
+          trialHtml += '<option value="Other">Other</option>';
+          trialHtml += "</select>";
+          trialHtml +=
+            '<input type="text" class="form-control mt-2 d-none" name="' +
+            group.name +
+            '_other[]" placeholder="Enter value">';
+        } else {
+          trialHtml +=
+            '<input type="' +
+            group.type +
+            '" class="form-control" name="' +
+            group.name +
+            '[]">';
+        }
+
         trialHtml += "</div>";
       });
 
@@ -51,6 +85,24 @@ $(document).ready(function () {
       trialCount++;
     });
 
+    // Function to show/hide the manual input field based on the dropdown selection
+    $(document).on("change", "select", function () {
+      var $select = $(this);
+      var $input = $select.next("input");
+
+      if ($select.val() === "Other") {
+        $input.removeClass("d-none");
+        $select.addClass("d-none");
+        $input.attr("name", $select.attr("name"));
+        $select.attr("name", "");
+      } else {
+        $input.addClass("d-none");
+        $select.removeClass("d-none");
+        $select.attr("name", $input.attr("name"));
+        $input.attr("name", $input.attr("name") + "_other");
+      }
+    });
+
     // Function to remove a form
     $(document).on("click", ".remove-trial", function () {
       $(this).closest(".trial").remove();
@@ -61,9 +113,9 @@ $(document).ready(function () {
     function copyFirstTrialValues($newTrial) {
       var $firstTrial = $(".trial").first();
 
-      $firstTrial.find("input").each(function (index) {
+      $firstTrial.find("input, select").each(function (index) {
         var value = $(this).val();
-        $newTrial.find("input").eq(index).val(value);
+        $newTrial.find("input, select").eq(index).val(value);
       });
     }
 

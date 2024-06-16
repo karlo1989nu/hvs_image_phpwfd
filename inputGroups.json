@@ -1,28 +1,10 @@
 [
-  { "label": "Name:", "type": "text", "name": "USER_NAME" },
-  { "label": "Task:", "type": "text", "name": "TRIAL_NAME" },
-  { "label": "Field:", "type": "text", "name": "SET_SCENE" },
+  { "label": "User Name:", "type": "text", "name": "USER_NAME" },
+  { "label": "Trial Name:", "type": "text", "name": "TRIAL_NAME" },
+  { "label": "Environment:", "type": "text", "name": "SET_SCENE" },
   { "label": "Participant ID:", "type": "text", "name": "SUBJECT" },
-  {
-    "label": "Group:",
-    "type": "text",
-    "name": "DESCRIPTOR"
-  },
-  {
-    "label": "Remarks:",
-    "type": "text",
-    "name": "REMARKS"
-  },
-  {
-    "label": "Group name:",
-    "type": "text",
-    "name": "DESCRIPTOR"
-  },
-  {
-    "label": "Remarks:",
-    "type": "text",
-    "name": "REMARKS"
-  },
+  { "label": "Group name:", "type": "text", "name": "DESCRIPTOR" },
+  { "label": "Remarks:", "type": "text", "name": "REMARKS" },
   {
     "label": "Trial type (Visible target, Regular or Probe):",
     "type": "text",
@@ -31,28 +13,23 @@
   {
     "label": "Start point:",
     "type": "text",
-    "name": "TRIAL_START_POINT"
+    "name": "TRIAL_START_POINT",
+    "dropdown": true
   },
-  {
-    "label": "Target radius:",
-    "type": "float",
-    "name": "TARGET_RADIUS"
-  },
+  { "label": "Target radius:", "type": "float", "name": "TARGET_RADIUS" },
   {
     "label": "Target position:",
     "type": "float",
-    "name": "TARGET_POSITION"
+    "name": "TARGET_POSITION",
+    "dropdown": true
   },
   {
     "label": "Visible target:",
     "type": "float",
-    "name": "MOVE_OBJECT Visible_10cm_Platform"
+    "name": "MOVE_OBJECT Visible_10cm_Platform",
+    "dropdown": true
   },
-  {
-    "label": "Maximum time (secs):",
-    "type": "float",
-    "name": "MAXIMUM_TIME"
-  },
+  { "label": "Maximum time (secs):", "type": "float", "name": "MAXIMUM_TIME" },
   {
     "label": "Time participant is kept at target (secs):",
     "type": "float",
